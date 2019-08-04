@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Chat.scss';
 
 import useGroupedMessages from '../../hooks/useGroupedMessages';
+import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 import useScrollToBottom from '../../hooks/useScrollToBottom';
 
 import ChatMessages from '../ChatMessages/ChatMessages';
@@ -18,6 +19,9 @@ export type User = {
 };
 
 type ChatState = {
+  next?: string;
+  previous?: string;
+  count?: string;
   users: User[];
   messages: ChatMessage[];
   currentMessageText: string;
@@ -28,7 +32,6 @@ const initalState = {
   messages: [],
   currentMessageText: '',
 };
-
 
 const chatUrl = 'http://localhost:8000/api/chat/1/';
 const authConf = {
@@ -41,27 +44,51 @@ const Chat = () => {
   const [state, setState] = useState<ChatState>(initalState);
   const messageListRef = useRef<HTMLDivElement>(null);
   const messageGroups = useGroupedMessages(state.messages);
-
-  useScrollToBottom(state.messages, messageListRef);
+  const [isFetching, onFetchComplete] = useInfiniteScroll(messageListRef.current);
 
   useEffect(() => {
-    const getMessages = async() => {
+    const fetchInitialMessages = async() => {
       const { data } = await axios.get(chatUrl, authConf);
+      const { next, previous, count, users = [], messages = [] } = data;
 
       setState((prevState) => ({
         ...prevState,
-        users: data.users ? data.users : prevState.users,
-        messages: data.messages.reverse(),
+        next,
+        previous,
+        count,
+        users,
+        messages: messages.reverse(),
       }));
     };
 
-    getMessages();
+    fetchInitialMessages();
   }, []);
+
+  useEffect(() => {
+    const fetchMoreMessages = async() => {
+      if (isFetching && state.next) {
+        const { data } = await axios.get(state.next, authConf);
+        const { next, previous, count, messages = [] } = data;
+  
+        setState((prevState) => ({
+          ...prevState,
+          next,
+          previous,
+          count,
+          messages: [...messages.reverse(), ...prevState.messages],
+        }));
+  
+        onFetchComplete();
+      }
+    };
+
+    fetchMoreMessages();
+  }, [isFetching, onFetchComplete, state.next]);
 
   const handleMessageTextChange = (event: ChangeEvent<HTMLInputElement>) =>
     setState({ ...state, currentMessageText: event.target.value });
 
-  const handleSendMessage = async(event: FormEvent<HTMLFormElement>) => {
+  const handleMessageSubmit = async(event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     
     if (state.currentMessageText) {
@@ -74,6 +101,8 @@ const Chat = () => {
       });
     }
   };
+
+  useScrollToBottom(messageListRef.current);
 
   return (
     <footer>
@@ -88,7 +117,7 @@ const Chat = () => {
           <div className="chat__messages" ref={messageListRef}>
               <ChatMessages users={state.users} messageGroups={messageGroups} />
           </div>
-          <form className="chat__form" onSubmit={handleSendMessage}>
+          <form className="chat__form" onSubmit={handleMessageSubmit}>
             <button className="chat__form__button chat__form__attachment" type="button" />
             <input
               className="chat__form__input"

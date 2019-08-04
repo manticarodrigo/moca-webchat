@@ -1,18 +1,17 @@
-import { RefObject, useEffect } from 'react';
-import { ChatMessage } from '../components/Chat/Chat';
+import { useEffect } from 'react';
 
-const useScrollToBottom = (messages: ChatMessage[], messageListRef: RefObject<HTMLDivElement>) => useEffect(() => {
+const useScrollToBottom = (element: HTMLElement | null) => useEffect(() => {
     const scrollToBottom = () => {
-      if (messageListRef) {
-        const scrollHeight = messageListRef.current!.scrollHeight;
-        const height = messageListRef.current!.clientHeight;
+      if (element) {
+        const scrollHeight = element.scrollHeight;
+        const height = element.clientHeight;
         const maxScrollTop = scrollHeight - height;
 
-        messageListRef.current!.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+        element.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
       }
     };
 
     scrollToBottom();
-  }, [messages, messageListRef])
+  }, [element])
 
 export default useScrollToBottom;
