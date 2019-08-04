@@ -1,0 +1,122 @@
+@import '../../styles//global.scss';
+
+$chat-width: 450px;
+$input-dimension: 56px;
+
+.chat {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  box-shadow: $box-shadow;
+  overflow: hidden;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    transition: min-width $duration;
+    background-color: color(default, light);
+    min-width: $chat-width;
+
+    .chat--collapsed & {
+      min-width: $chat-width / 3;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid color(secondary, light);
+    padding: 10px 20px;
+
+    .chat--collapsed & {
+      transition: background-color ($duration / 2), flex-direction $duration;
+      border-bottom: 0;
+      background-color: color(primary, base);
+      transition-delay: $duration;
+    }
+
+    &__image {
+
+      img {
+        width: 30px;
+        height: 30px;
+
+        .chat--collapsed & {
+          transition: filter ($duration / 2);
+          transition-delay: $duration;
+          filter: brightness(100);
+        }
+      }
+    }
+
+    &__button {
+      transition: transform $duration;
+      background: url('../../assets/images/utility/down-arrow.png') no-repeat center;
+      background-size: 26px;
+      width: 30px;
+      height: 30px;
+
+      .chat--collapsed & {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    transition: padding $duration;
+    border-top: 1px solid color(secondary, light);
+    padding: 10px;
+
+    .chat--collapsed & {
+      border-top: 0;
+      padding: 0;
+    }
+
+    > * {
+      transition: opacity ($duration / 2), margin $duration, padding $duration, max-width $duration, height $duration;
+      opacity: 1;
+      overflow: hidden;
+
+      .chat--collapsed & {
+        opacity: 0;
+        margin: 0;
+        border: 0;
+        padding: 0;
+        max-width: 0;
+        height: 0;
+      }
+    }
+
+    > *:focus {
+      z-index: 2;
+    }
+
+    &__input {
+      border-top: 2px solid color(secondary, base);
+      border-bottom: 2px solid color(secondary, base);
+      background-color: color(default, light);
+      max-width: $chat-width - ($input-dimension * 2);
+      height: $input-dimension;
+    }
+
+    &__attachment {
+      background: url('../../assets/images/utility/attach.png') no-repeat center;
+    }
+
+    &__submit {
+      background: url('../../assets/images/utility/send.svg') no-repeat center;
+    }
+
+    &__button {
+      border: 2px solid color(secondary, base);
+      background-color: color(default, light);
+      background-size: 20px;
+      max-width: $input-dimension;
+      height: $input-dimension;
+    }
+  }
+}

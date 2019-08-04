@@ -1,0 +1,98 @@
+// typography
+
+html,
+body {
+  // default typeface setup
+  @include line-height(16, 20);
+  @include font-size($base-font-size);
+
+  color: $text-color;
+  font-family: $base-font;
+
+  // make everything look a little nicer in webkit
+  -webkit-font-smoothing: antialiased;
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.25),
+    only screen and (min-device-pixel-ratio: 1.25),
+    only screen and (min-resolution: 200dpi),
+    only screen and (min-resolution: 1.25dppx) {
+      -webkit-font-smoothing: subpixel-antialiased;
+  }
+
+  @media (max-width: $break-sm) {
+    @include line-height(14, 18);
+    @include font-size(14);
+  }
+}
+
+.p {
+  @include line-height(16, 20);
+  @include font-size($base-font-size);
+
+  @media (max-width: $break-sm) {
+    @include line-height(14, 18);
+    @include font-size(14);
+  }
+}
+
+// headers
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin-bottom: $base-vertical-margin;
+}
+
+h1,
+.h1 {
+  @include line-height(30, 36);
+  @include font-size(30);
+
+  @media (max-width: $break-sm) {
+    @include line-height(24, 28);
+    @include font-size(24);
+  }
+}
+
+h2,
+.h2 {
+  @include line-height(24, 30);
+  @include font-size(24);
+
+  @media (max-width: $break-sm) {
+    @include line-height(20, 24);
+    @include font-size(20);
+  }
+}
+
+h3,
+.h3 {
+  @include line-height(18, 22);
+  @include font-size(18);
+
+  @media (max-width: $break-sm) {
+    @include line-height(16, 20);
+    @include font-size(16);
+  }
+}
+
+// links
+
+a {
+  text-decoration: none;
+  color: $text-color;
+
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+  }
+}

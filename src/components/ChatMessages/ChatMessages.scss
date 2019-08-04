@@ -1,0 +1,24 @@
+@import '../../styles//global.scss';
+
+.chat {
+
+  &__messages {
+    height: 400px;
+    max-height: 60vh;
+    transition: flex-basis $duration, opacity ($duration / 2), padding $duration;
+    opacity: 1;
+    padding: 20px;
+    overflow-y: scroll;
+
+    .chat--collapsed & {
+      flex-basis: 0;
+      opacity: 0;
+      padding: 0;
+      height: 0;
+    }
+
+    ul {
+      text-align: left;
+    }
+  }
+}

@@ -1,0 +1,62 @@
+// HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/
+
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  &,
+  &::before,
+  &::after {
+    box-sizing: inherit;
+  }
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+html,
+body {
+  background-color: color(primary, base);
+}
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+hr {
+  display: block;
+  margin: 1em 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+  padding: 0;
+  height: 1px;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+
+fieldset {
+  border: 0;
+}
+
+textarea {
+  resize: vertical;
+}

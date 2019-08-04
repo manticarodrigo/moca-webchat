@@ -1,0 +1,47 @@
+// font declarations
+
+$base-font: 'Raleway-Light', Helvetica, sans-serif;
+
+$base-font-size: 16;
+$base-line-height: 1.5;
+$base-margin-bottom: ($base-font-size * $base-line-height) * 1px;
+$base-vertical-margin: 14px;
+
+// color map
+
+$colors: (
+  primary: (
+    lighter: #666,
+    light: #979797,
+    base: #1b1b1b,
+    dark: #222
+  ),
+  secondary: (
+    light: #f4f4f4,
+    base: #ecf0f1,
+    dark: #e6e6e6,
+    darker: #9c9c9c,
+  ),
+  status: (
+    danger: #f53d3d,
+    neutral: #5794d9,
+  ),
+  default: (
+    dark: #000,
+    light: #fff
+  )
+);
+
+// misc
+
+$text-color: color(primary, base);
+$box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
+$box-shadow-light: 0 3px 6px rgba(0, 0, 0, .05);
+$box-shadow-dark: 0 3px 6px rgba(0, 0, 0, .45);
+$duration: .5s;
+
+// breakpoints
+
+$break-lg: 992px;
+$break-md: 750px;
+$break-sm: 500px;

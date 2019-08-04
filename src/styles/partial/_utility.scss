@@ -1,0 +1,75 @@
+.u-margin-hug {
+  &--vert {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &--top {
+    margin-top: 0;
+  }
+
+  &--bottom {
+    margin-bottom: 0;
+  }
+}
+
+.u-margin {
+
+  &-bottom {
+    margin-bottom: 12px;
+  }
+
+  &-left {
+    margin-left: 12px;
+  }
+}
+
+.u-text-bold {
+  font-weight: bold;
+}
+
+.u-text-uppercase {
+  text-transform: uppercase;
+}
+
+.u-placeholder-uppercase {
+
+  &::placeholder {
+    text-transform: uppercase;
+  }
+}
+
+.u-list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+.u-color {
+
+  &--secondary-darker {
+    color: color(secondary, darker);
+  }
+}
+
+.u-spaceless {
+  margin: 0;
+  padding: 0;
+  width: 0;
+  height: 0;
+}
+
+.u-hide-visually {
+  position: absolute;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip: rect(0 0 0 0);
+}
+
+.u-lock-scroll {
+  overflow: hidden;
+}

@@ -1,10 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './styles/main.scss';
+
+import Chat from './components/Chat/Chat';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <main className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -19,7 +22,8 @@ const App: React.FC = () => {
           Learn React
         </a>
       </header>
-    </div>
+      <Chat />
+    </main>
   );
 }
 
